@@ -1,0 +1,35 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: vault-agent-injector-hashicorp-vault-k8s-1-4-2-pkg-mngr-exec
+  namespace: vault
+spec:
+  action: Block
+  message: Alert! Execution of package management process inside container is denied
+  process:
+    matchPaths:
+    - execname: apt
+    - execname: apt-get
+    - execname: apk
+    - execname: dpkg
+    - execname: gdebi
+    - execname: make
+    - execname: yum
+    - execname: rpm
+    - execname: dnf
+    - execname: pacman
+    - execname: makepkg
+    - execname: yaourt
+    - execname: zypper
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: vault
+      app.kubernetes.io/name: vault-agent-injector
+      component: webhook
+  severity: 5
+  tags:
+  - NIST
+  - NIST_800-53_CM-7(4)
+  - SI-4
+  - process
+  - NIST_800-53_SI-4

@@ -1,0 +1,29 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: vault-agent-injector-hashicorp-vault-k8s-1-4-2-network-service-scanning
+  namespace: vault
+spec:
+  action: Audit
+  message: Network service has been scanned!
+  process:
+    matchPaths:
+    - execname: netstat
+    - execname: ip
+    - execname: iw
+    - execname: ethtool
+    - execname: ifconfig
+    - execname: arp
+    - execname: iwconfig
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: vault
+      app.kubernetes.io/name: vault-agent-injector
+      component: webhook
+  severity: 5
+  tags:
+  - MITRE
+  - FGT1046
+  - FIGHT
+  - 5G
+  - MITRE_T1046_Network_Service_Discovery

@@ -1,0 +1,29 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: vault-agent-injector-hashicorp-vault-k8s-1-4-2-remote-services
+  namespace: vault
+spec:
+  action: Audit
+  file:
+    matchDirectories:
+    - dir: /etc/ssh/
+    matchPaths:
+    - path: /var/log/wtmp
+    - path: /var/run/utmp
+    - path: /var/log/auth.log
+    - path: /etc/passwd
+    - path: /etc/shadow
+  message: Warning! access sensitive files detected
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: vault
+      app.kubernetes.io/name: vault-agent-injector
+      component: webhook
+  severity: 3
+  tags:
+  - MITRE
+  - FIGHT
+  - FGT1021
+  - 5G
+  - MITRE_T1021_Remote_Services

@@ -1,0 +1,80 @@
+  Deployment              | vault/vault-agent-injector      
+  Container               | hashicorp/vault-k8s:1.4.2       
+  OS                      | linux                           
+  Arch                    | amd64                           
+  Distro                  |                                 
+  Output Directory        | out/vault-vault-agent-injector  
+  policy-template version | v0.2.3                          
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+|               POLICY                |           SHORT DESC           | SEVERITY | ACTION |                       TAGS                        |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-file-     | File Integrity                 | 1        | Block  | NIST NIST_800-53_AU-2                             |
+| integrity-monitoring.yaml           | Monitoring/Protection          |          |        | NIST_800-53_SI-4 MITRE                            |
+|                                     |                                |          |        | MITRE_T1036_masquerading                          |
+|                                     |                                |          |        | MITRE_T1565_data_manipulation                     |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-network-  | Audit execution of network     | 5        | Audit  | MITRE FGT1046 FIGHT 5G                            |
+| service-scanning.yaml               | service scanning tools         |          |        | MITRE_T1046_Network_Service_Discovery             |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-system-   | Limit adversaries from         | 3        | Block  | MITRE                                             |
+| owner-discovery.yaml                | gathering system information   |          |        | MITRE_T1082_system_information_discovery          |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-cronjob-  | Audit access to cronjob files  | 5        | Audit  | NIST SI-4                                         |
+| cfg.yaml                            | as a part of system monitoring |          |        | NIST_800-53_SI-4                                  |
+|                                     | for better integrity           |          |        | CIS CIS_Linux                                     |
+|                                     |                                |          |        | CIS_5.1_Configure_Cron                            |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-k8s-      | Prevent execution of container | 5        | Block  | MITRE_T1609_container_administration_command      |
+| client-tool-exec.yaml               | administration tools within a  |          |        | MITRE_TA0002_execution                            |
+|                                     | container                      |          |        | MITRE_T1610_deploy_container                      |
+|                                     |                                |          |        | MITRE NIST_800-53 NIST_800-53_AU-2                |
+|                                     |                                |          |        | NIST_800-53_SI-4 NIST                             |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-impair-   | Audit defense control points   | 6        | Audit  | MITRE FGT1562 FIGHT 5G                            |
+| defense.yaml                        | to detect defense impairments  |          |        | MITRE_T1562_Impair _Defenses                      |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-remote-   | Audit remote access services   | 3        | Audit  | MITRE FIGHT FGT1021 5G                            |
+| services.yaml                       |                                |          |        | MITRE_T1021_Remote_Services                       |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-trusted-  | Prevent certificate bundle     | 1        | Block  | MITRE                                             |
+| cert-mod.yaml                       | tampering                      |          |        | MITRE_T1552_unsecured_credentials                 |
+|                                     |                                |          |        | FGT1555 FIGHT                                     |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-write-    | Audit device directory for     | 5        | Audit  | NIST NIST_800-53_AU-2                             |
+| under-dev-dir.yaml                  | enhanced security              |          |        | NIST_800-53_SI-4 MITRE                            |
+|                                     |                                |          |        | MITRE_T1036_masquerading                          |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-pkg-mngr- | Prohibit package manager       | 5        | Block  | NIST                                              |
+| exec.yaml                           | process execution in           |          |        | NIST_800-53_CM-7(4)                               |
+|                                     | containers to maintain system  |          |        | SI-4 process                                      |
+|                                     | integrity and limit authorized |          |        | NIST_800-53_SI-4                                  |
+|                                     | software versions and sources. |          |        |                                                   |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-write-in- | Restrict adversaries from      | 5        | Block  | MITRE_TA0002_Execution                            |
+| shm-dir.yaml                        | writing malicious code under   |          |        | MITRE                                             |
+|                                     | the shm folder                 |          |        |                                                   |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-write-    | Prevent concealment of         | 5        | Block  | NIST_800-53_SI-7 NIST                             |
+| etc-dir.yaml                        | adversarial processes          |          |        | NIST_800-53_SI-4 NIST_800-53                      |
+|                                     |                                |          |        | MITRE_T1562.001_disable_or_modify_tools           |
+|                                     |                                |          |        | MITRE_T1036.005_match_legitimate_name_or_location |
+|                                     |                                |          |        | MITRE_TA0003_persistence                          |
+|                                     |                                |          |        | MITRE MITRE_T1036_masquerading                    |
+|                                     |                                |          |        | MITRE_TA0005_defense_evasion                      |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-crypto-   | Cryptojacking, Crypto mining,  | 10       | Block  | cryptominer                                       |
+| miners.yaml                         | Malware protection             |          |        | MITRE_T1496_resource_hijacking                    |
+|                                     |                                |          |        | MITRE                                             |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-maint-    | Restrict or limit maintenance  | 1        | Audit  | PCI_DSS MITRE                                     |
+| tools-access.yaml                   | tool usage                     |          |        | MITRE_T1553_Subvert_Trust_Controls                |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+| hashicorp-vault-k8s-1-4-2-remote-   | Prevent data exfiltration      | 5        | Block  | MITRE                                             |
+| file-copy.yaml                      | attempts using utility tooling |          |        | MITRE_TA0008_lateral_movement                     |
+|                                     |                                |          |        | MITRE_TA0010_exfiltration                         |
+|                                     |                                |          |        | MITRE_TA0006_credential_access                    |
+|                                     |                                |          |        | MITRE_T1552_unsecured_credentials                 |
+|                                     |                                |          |        | NIST_800-53_SI-4(18) NIST                         |
+|                                     |                                |          |        | NIST_800-53 NIST_800-53_SC-4                      |
++-------------------------------------+--------------------------------+----------+--------+---------------------------------------------------+
+

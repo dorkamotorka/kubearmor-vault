@@ -1,0 +1,54 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: vault-agent-injector-hashicorp-vault-k8s-1-4-2-crypto-miners
+  namespace: vault
+spec:
+  action: Block
+  file:
+    matchDirectories:
+    - dir: /usr/local/bin/
+      readOnly: true
+      recursive: true
+    - dir: /sbin/
+      readOnly: true
+      recursive: true
+    - dir: /bin/
+      readOnly: true
+      recursive: true
+    - dir: /usr/bin/
+      readOnly: true
+      recursive: true
+    - dir: /var/local/bin/
+      readOnly: true
+      recursive: true
+    - dir: /boot/
+      readOnly: true
+      recursive: true
+  message: cryptominer detected and blocked
+  process:
+    matchDirectories:
+    - dir: /tmp/
+      recursive: true
+    matchPaths:
+    - execname: xmrig
+    - execname: dero
+    - execname: dero-miner-linux-amd64
+    - execname: dero-wallet-cli-linux-amd64
+    - execname: derod-linux-amd64
+    - execname: zgrab2
+    - execname: masscan
+    - execname: nmap
+    - execname: apt
+    - execname: apk
+    - execname: ntpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: vault
+      app.kubernetes.io/name: vault-agent-injector
+      component: webhook
+  severity: 10
+  tags:
+  - cryptominer
+  - MITRE_T1496_resource_hijacking
+  - MITRE
