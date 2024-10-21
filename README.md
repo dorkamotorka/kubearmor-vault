@@ -6,7 +6,7 @@ While these secrets are encrypted by default, encryption alone doesn't prevent a
 
 This alone can compromise the availability of your services that depend on these secrets, potentially resulting in significant financial and operational impacts.
 
-The code in this repository, show you how you can harden the security using KubeArmor.
+The code in this repository, demonstrates how you can harden the security of HashiCorp Vault using KubeArmor.
 
 <img width="1181" alt="Screenshot 2024-10-17 at 3 05 34 PM" src="https://github.com/user-attachments/assets/b4d6f915-4ffd-4b69-8457-277fb37cf3ea">
 
@@ -22,7 +22,7 @@ To ease the configuration and debugging of KubeArmor I'm gonna also use [kArmor 
 
 KubeArmor runs as a DaemonSet on your Kubernetes Cluster. 
 
-In order to secure HashiCorp Vault, we can use kArmor to suggest as the policies.
+In order to secure HashiCorp Vault, we can use kArmor to suggest us the policies.
 
 ```
 karmor recommend -n vault # In this example, vault is deployed in the "vault" namespace
@@ -50,7 +50,7 @@ Since your infrastructure can be complex, and the amount of KubeArmor policies c
 
 Since the recommended security policies only prevent the known attacks, it's important to think about how to make your service secure in future.
 
-This is achieved through Zero Trust Policy (ZTP) - which is another way of saying — don't trust anything by default, just the actions you specifically allow.
+This is achieved through Zero Trust Policy (ZTP) - which is another way of saying — _don't trust anything by default, just the actions you specifically allow_.
 
 To demonstrate this on HashiCorp Vault, let's create a custom KubeArmor policy that **ONLY** allows execution of the `/bin/vault` binary and blocks the rest.
 
